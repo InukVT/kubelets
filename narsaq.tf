@@ -60,6 +60,29 @@ resource "proxmox_vm_qemu" "narsaq" {
                     storage              = "local-lvm"
                 }
             }
+            scsi1 {
+                disk {
+                    backup               = true
+                    discard              = false
+                    emulatessd           = false
+                    format               = "raw"
+                    iops_r_burst         = 0
+                    iops_r_burst_length  = 0
+                    iops_r_concurrent    = 0
+                    iops_wr_burst        = 0
+                    iops_wr_burst_length = 0
+                    iops_wr_concurrent   = 0
+                    iothread             = false
+                    mbps_r_burst         = 0
+                    mbps_r_concurrent    = 0
+                    mbps_wr_burst        = 0
+                    mbps_wr_concurrent   = 0
+                    readonly             = false
+                    replicate            = true
+                    size                 = "13824M"
+                    storage              = "local-lvm"
+                }
+            }
         }
     }
 
