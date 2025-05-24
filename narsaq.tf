@@ -56,7 +56,7 @@ resource "proxmox_vm_qemu" "narsaq" {
                     mbps_wr_concurrent   = 0
                     readonly             = false
                     replicate            = true
-                    size                 = "13824M"
+                    size                 = "17648M"
                     storage              = "local-lvm"
                 }
             }
