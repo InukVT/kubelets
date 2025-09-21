@@ -5,7 +5,7 @@ resource "proxmox_vm_qemu" "narsaq" {
     boot                   = "c"
     bootdisk               = "scsi0"
     ciuser                 = "inuk"
-    cores                  = 2
+    cpu            { cores = 2 }
     define_connection_info = false
     force_create           = false
     full_clone             = false

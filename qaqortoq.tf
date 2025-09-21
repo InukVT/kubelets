@@ -5,7 +5,11 @@ resource "proxmox_vm_qemu" "qaqortoq" {
     boot                   = "c"
     bootdisk               = "scsi0"
     ciuser                 = "inuk"
-    cores                  = 4
+    cpu { 
+      cores = 4 
+      numa = false
+      sockets = 1
+    }
     define_connection_info = false
     force_create           = false
     full_clone             = false
@@ -14,12 +18,10 @@ resource "proxmox_vm_qemu" "qaqortoq" {
     kvm                    = true
     memory                 = 6144
     name                   = "qaqortoq"
-    numa                   = false
     onboot                 = true
     protection             = false
     qemu_os                = "other"
     scsihw                 = "virtio-scsi-pci"
-    sockets                = 1
     sshkeys                = <<-EOT
         ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCt/gZ2kyCtEbD6gBf3Tqz6h+cou1YiJ1C1yw0MgDIujgbdPs9FBGXGuU0+qb38nKWzy6jhfWqDQ5O1zvuxccswYrL6GRyPjDd/bTX+qqaE6K5MI67LXzVYZvXOx/+pqsLoGYeuYvcj0jevvaUGI2gL4AWf0+/vGARdQHcFcmU5GnEx58DOfHO8aGDAUNG74lMd1djp40lLKH+LUwnCWiRe83hgdVSBGkLaDVYMBSjpM0aPXhp6Y/SnFSrlfqqcQbZ9y1YtmiGZ7eyLvgRj4Klaf4q/Y7j4finzROPPGFs1SZkne3HYhVvsHnE/xW1YmhjDovvcCJpkwPm6NSgnZSgt7t4skVNivootTiEaenG3MgY1QCih+tTZ3M0s0MQXcYu20LL+HSnmIKnUlUjhtR8us45GVl/oXbKWowDi1OE5+bg/0EXqDmdwpW+5gFBo4XvTOjygEwJG+Hai6l8BwacjLET/QxNTORmNoA4Zf/qVd+IXJSeGfqGtF2LmAewcGa6cZ4vq1sZN0ZV4VnK5GdkSTYmvf8rQcfnRd1oa5nKStGl48Sfa907NeIHTj/vSC6sgdPmZi7MndiRWDhYKE33BujGhSbErKZRhOStOATnth+9FthGAnX5tQ53zkYKA6wOynh/p/2j3/RzVPYrXVm+FkSaLCFNSvKB2kiivaAB1BQ== bastian@inuk.blog
     EOT
@@ -81,7 +83,7 @@ resource "proxmox_vm_qemu" "qaqortoq" {
                     mbps_wr_concurrent   = 0
                     readonly             = false
                     replicate            = true
-                    size                 = "32G"
+                    size                 = "52G"
                     storage              = "local-lvm"
                 }
             }
@@ -105,6 +107,29 @@ resource "proxmox_vm_qemu" "qaqortoq" {
                     readonly             = false
                     replicate            = true
                     size                 = "8G"
+                    storage              = "local-lvm"
+                }
+            }
+            scsi3 {
+                disk {
+                    backup               = true
+                    discard              = false
+                    emulatessd           = true
+                    format               = "raw"
+                    iops_r_burst         = 0
+                    iops_r_burst_length  = 0
+                    iops_r_concurrent    = 0
+                    iops_wr_burst        = 0
+                    iops_wr_burst_length = 0
+                    iops_wr_concurrent   = 0
+                    iothread             = false
+                    mbps_r_burst         = 0
+                    mbps_r_concurrent    = 0
+                    mbps_wr_burst        = 0
+                    mbps_wr_concurrent   = 0
+                    readonly             = false
+                    replicate            = true
+                    size                 = "12G"
                     storage              = "local-lvm"
                 }
             }
