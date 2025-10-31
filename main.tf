@@ -16,8 +16,3 @@ provider "proxmox" {
   pm_tls_insecure = true
 }
 
-variable "pm_password" {
-  description = "Password for accessing Proxmox"
-  type        = string
-  sensitive   = true
-}
