@@ -157,6 +157,32 @@ resource "proxmox_vm_qemu" "vm" {
           }
         }
       }
+      dynamic "scsi4" {
+        for_each = contains(keys(local.scsi_blocks), "scsi4") ? [local.scsi_blocks.scsi3] : []
+        content {
+          disk {
+            backup               = scsi3.value.backup
+            discard              = false
+            emulatessd           = scsi3.value.ssd
+            format               = "raw"
+            iops_r_burst         = 0
+            iops_r_burst_length  = 0
+            iops_r_concurrent    = 0
+            iops_wr_burst        = 0
+            iops_wr_burst_length = 0
+            iops_wr_concurrent   = 0
+            iothread             = false
+            mbps_r_burst         = 0
+            mbps_r_concurrent    = 0
+            mbps_wr_burst        = 0
+            mbps_wr_concurrent   = 0
+            readonly             = false
+            replicate            = scsi3.value.replicate
+            size                 = scsi3.value.size
+            storage              = "local-lvm"
+          }
+        }
+      }
     }
   }
 
